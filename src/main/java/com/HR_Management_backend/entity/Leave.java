@@ -1,13 +1,10 @@
 package com.HR_Management_backend.entity;
 
 import jakarta.persistence.*;
-import lombok.*;
 import java.util.Date;
 
 @Entity
-@Data
-@NoArgsConstructor
-@AllArgsConstructor
+@Table(name = "leaves")
 public class Leave {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -38,4 +35,22 @@ public class Leave {
 
     @Column(columnDefinition = "TEXT")
     private String rejectionReason;
+
+    public Leave() {
+    }
+
+    public Leave(Integer id, Employee employee, LeaveType leaveType, Date startDate, Date endDate, Integer leaveDays, String reason, String documentUrl, String status, Date appliedOn, Employee approvedBy, String rejectionReason) {
+        this.id = id;
+        this.employee = employee;
+        this.leaveType = leaveType;
+        this.startDate = startDate;
+        this.endDate = endDate;
+        this.leaveDays = leaveDays;
+        this.reason = reason;
+        this.documentUrl = documentUrl;
+        this.status = status;
+        this.appliedOn = appliedOn;
+        this.approvedBy = approvedBy;
+        this.rejectionReason = rejectionReason;
+    }
 }
