@@ -78,6 +78,11 @@ public class Employee {
         this.notes = notes;
     }
 
+    public Employee(Integer employeeId) {
+    }
+
+
+
     public Integer getId() {
         return id;
     }

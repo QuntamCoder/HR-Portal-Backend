@@ -11,8 +11,8 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
-                .cors(Customizer.withDefaults())  // Enable CORS with default configuration
-                .csrf(csrf -> csrf.disable());    // Disable CSRF
+                .cors(Customizer.withDefaults())
+                .csrf(csrf -> csrf.disable());
         return http.build();
     }
 }
