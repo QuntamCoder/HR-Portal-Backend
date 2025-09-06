@@ -4,7 +4,6 @@ import jakarta.persistence.*;
 import java.util.Date;
 
 @Entity
-
 public class Notice {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -19,14 +18,12 @@ public class Notice {
     @Temporal(TemporalType.TIMESTAMP)
     private Date createdAt;
 
-    @ManyToOne
-    @JoinColumn(name = "posted_by")
-    private Employee postedBy;
+    @Column(nullable = false)
+    private String postedBy = "admin"; // Always "admin"
 
-    public Notice() {
-    }
+    public Notice() {}
 
-    public Notice(Integer noticeId, String title, String content, Date createdAt, Employee postedBy) {
+    public Notice(Integer noticeId, String title, String content, Date createdAt, String postedBy) {
         this.noticeId = noticeId;
         this.title = title;
         this.content = content;
@@ -34,48 +31,18 @@ public class Notice {
         this.postedBy = postedBy;
     }
 
-    public Integer getNoticeId() {
-        return noticeId;
-    }
+    public Integer getNoticeId() { return noticeId; }
+    public void setNoticeId(Integer noticeId) { this.noticeId = noticeId; }
 
-    public Notice setNoticeId(Integer noticeId) {
-        this.noticeId = noticeId;
-        return this;
-    }
+    public String getTitle() { return title; }
+    public void setTitle(String title) { this.title = title; }
 
-    public String getTitle() {
-        return title;
-    }
+    public String getContent() { return content; }
+    public void setContent(String content) { this.content = content; }
 
-    public Notice setTitle(String title) {
-        this.title = title;
-        return this;
-    }
+    public Date getCreatedAt() { return createdAt; }
+    public void setCreatedAt(Date createdAt) { this.createdAt = createdAt; }
 
-    public String getContent() {
-        return content;
-    }
-
-    public Notice setContent(String content) {
-        this.content = content;
-        return this;
-    }
-
-    public Date getCreatedAt() {
-        return createdAt;
-    }
-
-    public Notice setCreatedAt(Date createdAt) {
-        this.createdAt = createdAt;
-        return this;
-    }
-
-    public Employee getPostedBy() {
-        return postedBy;
-    }
-
-    public Notice setPostedBy(Employee postedBy) {
-        this.postedBy = postedBy;
-        return this;
-    }
+    public String getPostedBy() { return postedBy; }
+    public void setPostedBy(String postedBy) { this.postedBy = postedBy; }
 }

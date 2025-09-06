@@ -1,9 +1,7 @@
 package com.HR_Management_backend.service;
 
 import com.HR_Management_backend.entity.Notice;
-import com.HR_Management_backend.entity.Employee;
 import com.HR_Management_backend.repository.NoticeRepository;
-import com.HR_Management_backend.repository.EmployeeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -16,21 +14,21 @@ public class NoticeService {
     @Autowired
     private NoticeRepository noticeRepository;
 
-    @Autowired
-    private EmployeeRepository employeeRepository;
-
-    public Notice createNotice(String title, String content, String username) {
-        Employee postedBy = employeeRepository.findByEmail(username)
-                .orElseThrow(() -> new RuntimeException("Employee not found"));
-        Notice notice = new Notice();
-        notice.setTitle(title);
-        notice.setContent(content);
+    public Notice createNotice(Notice notice) {
         notice.setCreatedAt(new Date());
-        notice.setPostedBy(postedBy);
+        notice.setPostedBy("admin"); // Force static value
         return noticeRepository.save(notice);
     }
 
     public List<Notice> getAllNotices() {
         return noticeRepository.findAll();
+    }
+
+    public Notice getNoticeById(Integer id) {
+        return noticeRepository.findById(id).orElse(null);
+    }
+
+    public void deleteNotice(Integer id) {
+        noticeRepository.deleteById(id);
     }
 }
